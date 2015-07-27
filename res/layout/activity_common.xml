@@ -1,0 +1,40 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_bg" >
+
+    <FrameLayout
+        android:id="@+id/fl_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <include
+            layout="@layout/baiyun_actionbar"
+            android:focusable="true" />
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/iv_action_bar_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fl_actionbar"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_line_color" />
+
+    <FrameLayout
+        android:id="@+id/fl_container_common"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/iv_action_bar_line"
+        tools:ignore="MergeRootFrame" />
+
+    <FrameLayout
+        android:id="@+id/fl_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fl_actionbar"
+        android:visibility="gone" >
+    </FrameLayout>
+</RelativeLayout>
