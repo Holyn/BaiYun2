@@ -6,65 +6,47 @@ import com.baiyun2.base.BaseFragmentActivity;
 import com.baiyun2.sharepreferences.AppSettingSP;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.FragmentActivity;
 import android.view.WindowManager;
+
 /**
  * @author Holyn
  * @since 2015-1-18
  *
  */
-public class StartActivity extends BaseFragmentActivity implements StartFragment.OnDelayListener{
+public class StartActivity extends FragmentActivity {
 	private AppSettingSP appSettingSP;
-	
+
 	@Override
-	public void init() {
-		showFullScreen();
+	protected void onCreate(Bundle arg0) {
+		super.onCreate(arg0);
+		setContentView(R.layout.activity_start);
 		overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-		
-		setTopBarEnable(false);//关闭头部的导航栏
-		
-//		showStartFragment();
-		
+
 		appSettingSP = AppSettingSP.getSingleInstance(this);
 		
-		if (appSettingSP.getIsFirst()) {
-			showGuideFragment();
-			appSettingSP.setIsFirst(false);
-		}else {
-			Intent intent = new Intent(StartActivity.this, MainActivity.class);
-			startActivity(intent);
-			this.finish();
-		}
-		
-	}
+		new Handler().postDelayed(new Runnable() {
 
-	@Override
-	public void onDelay(boolean isFinish) {
-		if (isFinish) {
-			if (appSettingSP.getIsFirst()) {
-				showGuideFragment();
-				appSettingSP.setIsFirst(false);
-			}else {
-				Intent intent = new Intent(StartActivity.this, MainActivity.class);
-				startActivity(intent);
-				this.finish();
+			@Override
+			public void run() {
+
+				if (appSettingSP.getIsFirst()) {
+					showGuideFragment();
+					appSettingSP.setIsFirst(false);
+				} else {
+					Intent intent = new Intent(StartActivity.this, MainActivity.class);
+					startActivity(intent);
+					StartActivity.this.finish();
+				}
+
 			}
-		}
-	}
-	
-	private void showStartFragment(){
-		getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_common, StartFragment.newInstance()).commit();
-	}
-	
-	private void showGuideFragment(){
-		getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_common, GuideFragment.newInstance()).commit();
+		}, 2000);
 	}
 
-	public void showFullScreen(){
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-	}
-	
-	public void closeFullScreen() {
-		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+	private void showGuideFragment() {
+		getSupportFragmentManager().beginTransaction().replace(R.id.fl_container_common, GuideFragment.newInstance()).commit();
 	}
 
 }

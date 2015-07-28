@@ -17,7 +17,6 @@ public class BaiduPushManager {
 		// 您可以用自定义常量等其它方式实现，来替换参数中的Utils.getMetaValue(PushDemoActivity.this,"api_key")
 		
 		if (AppSettingSP.getSingleInstance(context).isBaiduPushEnable()) {
-			System.out.println("====> PushManager.startWork....");
 			PushManager.startWork(context, PushConstants.LOGIN_TYPE_API_KEY, BaiduPushUtils.getMetaValue(context, "api_key"));
 			setNotificationBuilder(context);
 		}

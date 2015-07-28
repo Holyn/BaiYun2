@@ -60,7 +60,7 @@ public class StartFragment extends Fragment{
 			public void run() {
 				onDelayListener.onDelay(true);
 			}
-		}, 2000);
+		}, 1000);
 		
 		return rootView;
 	}

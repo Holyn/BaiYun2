@@ -16,12 +16,15 @@ import com.baiyun2.vo.parcelable.VersionPar;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends BaseSlidingFragmentActivity {
 	public static final String STATE_ACTIVITY = "state_main_activity";
@@ -39,6 +42,8 @@ public class MainActivity extends BaseSlidingFragmentActivity {
 	
 	private boolean isSetLLConsultEnableFalse = false;
 	private boolean isSetTopBarTitlePinyinFalse = false;
+	
+	private long exitTime = 0;
 	
 	@Override
 	public void init() {
@@ -195,8 +200,36 @@ public class MainActivity extends BaseSlidingFragmentActivity {
 				isSetLLConsultEnableFalse = false;
 			}
 		}else {
-			super.onBackPressed();
+//			super.onBackPressed();
 		}
+	}
+	
+	/** 捕捉按下返回键操作 */
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO 按两次返回键退出应用程序
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0 && containerFragment.isVisible()) {
+			// 判断间隔时间 大于2秒就退出应用
+			if ((System.currentTimeMillis() - exitTime) > 2000) {
+				// 应用名
+				String applicationName = getResources().getString(
+						R.string.app_name);
+				String msg = "再按一次返回键退出" + applicationName;
+				//String msg1 = "再按一次返回键回到桌面";
+				Toast.makeText(MainActivity.this, msg, 0).show();
+				// 计算两次返回键按下的时间差
+				exitTime = System.currentTimeMillis();
+			} else {
+				// 关闭应用程序
+//				finish();
+				// 返回桌面操作
+				 Intent home = new Intent(Intent.ACTION_MAIN);
+				 home.addCategory(Intent.CATEGORY_HOME);
+				 startActivity(home);
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 
 	private void appExit(){//退出app
