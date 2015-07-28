@@ -212,7 +212,6 @@ public class LNewsFragment extends BaseFragment{
 	
 	//新闻列表
 	private void getNewsList(final int page){
-		System.out.println("====> getNewsList....");
 		httpUtils.getNewsList(newsId, page, new SchoolLifeHttpUtils.onGetNewsListListener() {
 			
 			@Override
@@ -269,7 +268,6 @@ public class LNewsFragment extends BaseFragment{
 				return;
 			}
 			int realPosition = (int) id;
-			System.out.println("===> realPosition = "+realPosition);
 			LNewsPar news = newsList.get(realPosition);
 			((LNewsActivity)getActivity()).showWebViewFragment2(news.getContentUrl(), "新闻详情");
 		}

@@ -74,6 +74,12 @@ public class HttpURL {
 	public final static String SCHOOL_ENVIRONMENT = URL_PRE + "schoolIntroContent?type=103";
 	
 	/**
+	 * 首页-技师微报-滚动图片
+	 * http://app.baiyunu.edu.cn:8081/app/schoolNews
+	 */
+	public final static String SCHOOL_NEWS_PIC = URL_PRE + "schoolNews";
+	
+	/**
 	 * 首页-技师微报
 	 * http://app.baiyunu.edu.cn:8081/app/schoolNews?page=1&limit=10
 	 */

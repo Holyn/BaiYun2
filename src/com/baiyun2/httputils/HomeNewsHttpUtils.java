@@ -5,11 +5,15 @@ import java.util.List;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.baiyun2.http.HttpRecode;
 import com.baiyun2.http.HttpURL;
+import com.baiyun2.httputils.SchoolLifeHttpUtils.onGetNewsAdListener;
 import com.baiyun2.vo.parcelable.HomeAdPar;
 import com.baiyun2.vo.parcelable.HomeNewsPar;
+import com.baiyun2.vo.parcelable.VoPicPar;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
@@ -33,6 +37,10 @@ public class HomeNewsHttpUtils extends HttpUtils{
 	
 	public interface OnGetDetailUrlListener{
 		public void onGetDetailUrl(String url);
+	}
+	
+	public interface onGetNewsAdListener{//获取滚动的图片
+		public void onGetNewsAd(List<VoPicPar> picPars);
 	}
 	
 	public void getPageHomeNews(final int page, final OnGetPageHomeNewsListener onGetPageHomeNewsListener){
@@ -113,6 +121,52 @@ public class HomeNewsHttpUtils extends HttpUtils{
 			@Override
 			public void onFailure(HttpException error, String msg) {
 				onGetDetailUrlListener.onGetDetailUrl(null);
+				Toast.makeText(context, "数据请求失败", Toast.LENGTH_SHORT).show();
+			}
+			
+		});
+	}
+	
+	public void getNewsAd(final onGetNewsAdListener oGetNewsAdListener){
+		String url = HttpURL.SCHOOL_NEWS_PIC;
+		send(HttpMethod.GET, url, new RequestCallBack<String>() {
+
+			@Override
+			public void onSuccess(ResponseInfo<String> responseInfo) {
+				List<VoPicPar> picPars = null;
+				try {
+					JsonParser parser = new JsonParser();
+					JsonObject jsonObject = parser.parse(responseInfo.result).getAsJsonObject();
+
+					JsonElement recodeEle = jsonObject.get("recode");
+					if (recodeEle.isJsonPrimitive()) {
+						String recode = recodeEle.getAsString();
+						if (recode.equalsIgnoreCase(HttpRecode.GET_SUCCESS)) {
+							JsonElement dataEle = jsonObject.get("data");
+							if (dataEle.isJsonObject()) {
+								jsonObject = dataEle.getAsJsonObject();
+								JsonElement pictureListEle = jsonObject.get("pictureList");//头部广告list
+								if (pictureListEle != null) {
+//									System.out.println("====> pictureListEle = "+pictureListEle);
+									if (pictureListEle.isJsonArray()) {
+										JsonArray jsonArray = pictureListEle.getAsJsonArray();
+										java.lang.reflect.Type type = new TypeToken<List<VoPicPar>>() {}.getType();
+										picPars = new Gson().fromJson(jsonArray.toString(), type);
+									}
+								}
+							}
+						}
+					}
+				} catch (Exception e) {
+					picPars = null;
+					System.out.println(e);
+				}
+				oGetNewsAdListener.onGetNewsAd(picPars);
+			}
+
+			@Override
+			public void onFailure(HttpException error, String msg) {
+				oGetNewsAdListener.onGetNewsAd(null);
 				Toast.makeText(context, "数据请求失败", Toast.LENGTH_SHORT).show();
 			}
 			

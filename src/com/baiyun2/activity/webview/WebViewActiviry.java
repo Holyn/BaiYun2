@@ -106,6 +106,7 @@ public class WebViewActiviry extends FragmentActivity{
 			Toast.makeText(this, "图文链接为空", Toast.LENGTH_SHORT).show();
 		}else {
 			if (contentUrl.equalsIgnoreCase("")) {
+				
 			}else {
 				if (webViewType == BAIDU_PUSH) {
 					contentUrl = HttpURL.HOST+"/"+contentUrl;//构造完整Html5路径
