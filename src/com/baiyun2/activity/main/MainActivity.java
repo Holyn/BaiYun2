@@ -1,5 +1,6 @@
 package com.baiyun2.activity.main;
 
+import com.baiyun2.activity.MyApplication;
 import com.baiyun2.activity.R;
 import com.baiyun2.activity.webview.WebViewFragment2;
 import com.baiyun2.baidu_push.BaiduPushManager;
@@ -10,6 +11,7 @@ import com.baiyun2.fragment.sliding.HelpFragment;
 import com.baiyun2.fragment.sliding.LoginFragment;
 import com.baiyun2.fragment.sliding.SettingFragment;
 import com.baiyun2.fragment.sliding.ToolsFragment;
+import com.baiyun2.fragment.sliding.UserInfoFragment;
 import com.baiyun2.httputils.SlideMenuHttpUtils;
 import com.baiyun2.util.ui.FragmentUtil;
 import com.baiyun2.vo.parcelable.VersionPar;
@@ -34,6 +36,7 @@ public class MainActivity extends BaseSlidingFragmentActivity {
 	private Fragment curFragment;
 	
 	private int curPosition = -1;
+	private UserInfoFragment userInfoFragment = null;
 	private LoginFragment loginFragment = null;
 	private ToolsFragment toolsFragment = null;
 	private SettingFragment settingFragment = null;
@@ -84,28 +87,33 @@ public class MainActivity extends BaseSlidingFragmentActivity {
 				}
 				switch (menuType) {
 				case SlideMenuFragment.MENU_LOGIN:
-					setTopBarTitle("用户登录");
-					switchFragment(1);
+					if (((MyApplication)getApplication()).isLogin()) {
+						setTopBarTitle("用户信息");
+						switchFragment(1);
+					}else {
+						setTopBarTitle("用户登录");
+						switchFragment(2);
+					}
 					closeSlideMenuFragmetAndShowContent();
 					break;
 				case SlideMenuFragment.MENU_TOOLS:
 					setTopBarTitle("实用工具");
-					switchFragment(2);
+					switchFragment(3);
 					closeSlideMenuFragmetAndShowContent();
 					break;
 				case SlideMenuFragment.MENU_SETTING:
 					setTopBarTitle("设置");
-					switchFragment(3);
+					switchFragment(4);
 					closeSlideMenuFragmetAndShowContent();
 					break;
 				case SlideMenuFragment.MENU_HELP:
 					setTopBarTitle("使用帮助");
-					switchFragment(4);
+					switchFragment(5);
 					closeSlideMenuFragmetAndShowContent();
 					break;
 				case SlideMenuFragment.MENU_ABOUT:
 					setTopBarTitle("关于我们");
-					switchFragment(5);
+					switchFragment(6);
 					closeSlideMenuFragmetAndShowContent();
 					break;
 				case SlideMenuFragment.MENU_EXIT:
@@ -138,26 +146,31 @@ public class MainActivity extends BaseSlidingFragmentActivity {
 			}
 			nextFragment = containerFragment;
 		}else if (position == 1) {
+			if (userInfoFragment == null) {
+				userInfoFragment = UserInfoFragment.newInstance();
+			}
+			nextFragment = userInfoFragment;
+		}else if (position == 2) {
 			if (loginFragment == null) {
 				loginFragment = LoginFragment.newInstance();
 			}
 			nextFragment = loginFragment;
-		}else if (position == 2) {
+		}else if (position == 3) {
 			if (toolsFragment == null) {
 				toolsFragment = ToolsFragment.newInstance();
 			}
 			nextFragment = toolsFragment;
-		}else if (position == 3) {
+		}else if (position == 4) {
 			if (settingFragment == null) {
 				settingFragment = SettingFragment.newInstance();
 			}
 			nextFragment = settingFragment;
-		}else if (position == 4) {
+		}else if (position == 5) {
 			if (helpFragment == null) {
 				helpFragment = HelpFragment.newInstance();
 			}
 			nextFragment = helpFragment;
-		}else if (position == 5) {
+		}else if (position == 6) {
 			if (aboutFragment == null) {
 				aboutFragment = AboutFragment.newInstance();
 			}

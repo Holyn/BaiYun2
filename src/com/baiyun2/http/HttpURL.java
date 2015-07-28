@@ -13,6 +13,11 @@ public class HttpURL {
 	public final static String PAGE_PARAM = "&page=";
 	public final static String ID_PARAM = "&id=";
 	
+	public final static String PARAM_ID = "id";
+	public final static String PARAM_USER_NAME = "userName";
+	public final static String PARAM_IMG = "img";
+	public final static String PARAM_BRIEF = "brief";
+	
 	/**
 	 * 首页-广告图片
 	 * http://app.baiyunu.edu.cn:8081/app/homePage?type=10
@@ -273,9 +278,33 @@ public class HttpURL {
 	
 	/**
 	 * 校内服务--课表查询
-	 * http://app.baiyunu.edu.cn:8081/schoolClassInquiry.html
+	 * http://app.baiyunu.edu.cn:8081/schoolClassInquiry.html?username={由手机端补充填写}
 	 */
-	public final static String S_CLASS_INQUIRY = HOST + "/schoolClassInquiry.html";
+	public final static String S_CLASS_INQUIRY = HOST + "/schoolClassInquiry.html?username=";
+	
+	/**
+	 * 校内服务--教学任务
+	 * http://app.baiyunu.edu.cn:8081/teachTask.html?username={由手机端补充填写}
+	 */
+	public final static String S_TEACH_TASK = HOST + "/teachTask.html?username=";
+	
+	/**
+	 * 校内服务--考试安排
+	 * http://app.baiyunu.edu.cn:8081/examinationArrangement.html?username={由手机端补充填写}
+	 */
+	public final static String S_EXAM = HOST + "/examinationArrangement.html?username=";
+	
+	/**
+	 * 校内服务--水电查询
+	 * http://app.baiyunu.edu.cn:8081/hydropowerInquiry.html?username={由手机端补充填写}
+	 */
+	public final static String S_HYDROP_POWER = HOST + "/hydropowerInquiry.html?username=";
+	
+	/**
+	 * 校内服务--图书馆
+	 * http://app.baiyunu.edu.cn:8081/library.html?username={由手机端补充填写}
+	 */
+	public final static String S_LIBRARY = HOST + "/library.html?username=";
 	
 	/**
 	 * 校内服务--通知公告
@@ -328,11 +357,15 @@ public class HttpURL {
 	 * http://app.baiyunu.edu.cn:8081/app/userLogin?
 	 * userName=admin&password=123456&randomString=2837&mobileChannelId=3656702722203844290&mobileUserId=1460406946
 	 */
-	public final static String PASSWORD_PARAM = "&password=";
-	public final static String RANDOM_STRING_PARAM = "&randomString=";
-	public final static String MOBILE_CHANNEL_ID_PARAM = "&mobileChannelId=";
-	public final static String MOBILE_USER_ID_PARAM = "&mobileUserId=";
-	public final static String R_LOGIN = URL_PRE + "userLogin?userName=";//接口
+	public final static String PARAM_PASSWORD = "password";
+	public final static String PARAM_RANDOM_STRING = "randomString";
+	public final static String R_LOGIN = URL_PRE + "userLogin";//接口
+	
+	/**
+	 * 右侧菜单--上传个人头像接口（与用户id关联）
+	 * http://app.byxy.com:8080/app/upLoadUserImg?id=用户id&img=（通过base64编码后的图片编码）
+	 */
+	public final static String R_UPLOAD_USER_IMG = URL_PRE + "upLoadUserImg";
 	
 	/**
 	 * 右侧菜单--使用工具--班车表
@@ -365,7 +398,11 @@ public class HttpURL {
 	
 	/**
 	 * 右侧菜单--意见反馈
+	 * http://app.byxy.com:8080/app/advice?description=好好学习天天向上&creater=Holyn
 	 */
+	public final static String PARAM_DESCRIPTION = "description";
+	public final static String PARAM_CREATER = "creater";
+	public final static String R_ADVICE = URL_PRE + "advice";
 	
 	/**
 	 * 右侧菜单--修改密码

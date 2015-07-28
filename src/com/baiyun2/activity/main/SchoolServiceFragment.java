@@ -33,6 +33,7 @@ import com.baiyun2.http.HttpURL;
 import com.baiyun2.httputils.SchoolLifeHttpUtils;
 import com.baiyun2.httputils.SchoolServiceHttpUtils;
 import com.baiyun2.httputils.VoHttpUtils;
+import com.baiyun2.sharepreferences.UserInfoSP;
 import com.baiyun2.vo.parcelable.Vo1Par;
 import com.baiyun2.vo.parcelable.VoPicPar;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -64,6 +65,8 @@ public class SchoolServiceFragment extends BaseFragment {
 
 	private VoHttpUtils voHttpUtils;
 	private String goRepairsUrl = null;// 故障报修的跳转链接
+	
+	private UserInfoSP userInfoSP;
 
 	public static SchoolServiceFragment newInstance() {
 		return new SchoolServiceFragment();
@@ -95,6 +98,7 @@ public class SchoolServiceFragment extends BaseFragment {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		voHttpUtils = new VoHttpUtils(getActivity());
+		userInfoSP = UserInfoSP.getSingleInstance(getActivity());
 	}
 
 	@Override
@@ -120,7 +124,7 @@ public class SchoolServiceFragment extends BaseFragment {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getActivity(), WebViewActiviry2.class);
-				intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_CLASS_INQUIRY);
+				intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_CLASS_INQUIRY+userInfoSP.getUserName());
 				intent.putExtra(WebViewActiviry2.KEY_TITLE, "课表查询");
 				startActivity(intent);
 			}
@@ -155,7 +159,10 @@ public class SchoolServiceFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-
+				Intent intent = new Intent(getActivity(), WebViewActiviry2.class);
+				intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_TEACH_TASK+userInfoSP.getUserName());
+				intent.putExtra(WebViewActiviry2.KEY_TITLE, "教学任务");
+				startActivity(intent);
 			}
 		});
 
@@ -165,7 +172,10 @@ public class SchoolServiceFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-
+				Intent intent = new Intent(getActivity(), WebViewActiviry2.class);
+				intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_EXAM+userInfoSP.getUserName());
+				intent.putExtra(WebViewActiviry2.KEY_TITLE, "考试安排");
+				startActivity(intent);
 			}
 		});
 
@@ -175,7 +185,10 @@ public class SchoolServiceFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-
+				Intent intent = new Intent(getActivity(), WebViewActiviry2.class);
+				intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_HYDROP_POWER+userInfoSP.getUserName());
+				intent.putExtra(WebViewActiviry2.KEY_TITLE, "水电查询");
+				startActivity(intent);
 			}
 		});
 
@@ -223,7 +236,10 @@ public class SchoolServiceFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-
+				Intent intent = new Intent(getActivity(), WebViewActiviry2.class);
+				intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_LIBRARY+userInfoSP.getUserName());
+				intent.putExtra(WebViewActiviry2.KEY_TITLE, "图书馆");
+				startActivity(intent);
 			}
 		});
 	}
