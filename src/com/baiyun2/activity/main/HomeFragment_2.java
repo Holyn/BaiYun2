@@ -10,7 +10,6 @@ import android.webkit.URLUtil;
 import android.widget.Toast;
 
 import com.baiyun2.activity.R;
-import com.baiyun.kefu.KeFuManager;
 import com.baiyun2.activity.home.DepartmentActivity;
 import com.baiyun2.activity.home.JobActivity;
 import com.baiyun2.activity.home.NewsActivity;

@@ -13,7 +13,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.baiyun2.activity.R;
-import com.baiyun.kefu.KeFuManager;
 import com.baiyun2.activity.MyApplication;
 import com.baiyun2.activity.recruit.ApplyFragment;
 import com.baiyun2.activity.recruit.EnterFragment;
