@@ -140,13 +140,17 @@ public class SlideMenuFragment extends Fragment{
 			}
 		}
 		
-		mBitmapIn = loadBitmap(R.drawable.slide_user_info_bg);
-		mBitmapOut = Bitmap.createBitmap(mBitmapIn.getWidth(),
-				mBitmapIn.getHeight(), mBitmapIn.getConfig());
-		mGBlurPic = new GBlurPic(getActivity());
-		mBitmapOut = mGBlurPic.gBlurBitmap(mBitmapIn, radius);
-		ivUserInfoBg = (ImageView)rootView.findViewById(R.id.iv_user_info_bg);
-		ivUserInfoBg.setImageBitmap(mBitmapOut);
+		try {
+			mBitmapIn = loadBitmap(R.drawable.slide_user_info_bg);
+			mBitmapOut = Bitmap.createBitmap(mBitmapIn.getWidth(),
+					mBitmapIn.getHeight(), mBitmapIn.getConfig());
+			mGBlurPic = new GBlurPic(getActivity());
+			mBitmapOut = mGBlurPic.gBlurBitmap(mBitmapIn, radius);
+			ivUserInfoBg = (ImageView)rootView.findViewById(R.id.iv_user_info_bg);
+			ivUserInfoBg.setImageBitmap(mBitmapOut);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		RelativeLayout rlInfo = (RelativeLayout)rootView.findViewById(R.id.rl_info);
 		rlInfo.setOnClickListener(new View.OnClickListener() {
