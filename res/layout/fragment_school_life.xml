@@ -150,7 +150,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="党建合作 "
+                        android:text="党团活动 "
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_size_16" />
                 </LinearLayout>
