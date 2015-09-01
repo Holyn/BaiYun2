@@ -89,7 +89,7 @@ public class SchoolLifeFragment extends BaseFragment{
 		initADs(rootView);
 		getAd();
 		
-		//党建合作
+		//党建合作（党团活动）
 		btnNews = (Button)rootView.findViewById(R.id.btn_news);
 		btnNews.setOnClickListener(new View.OnClickListener() {
 			
