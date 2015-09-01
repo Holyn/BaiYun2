@@ -10,7 +10,7 @@ import com.baiyun2.util.ui.FragmentUtil;
 
 public class LNewsActivity extends BaseFragmentActivity{
 	public final static String NEWS_ID_VALUE = "news_id_value";
-	public final static String NEWS_ID_24 = "24";//党建合作（id=24）
+	public final static String NEWS_ID_24 = "24";//党建合作（id=24）党团活动
 	public final static String NEWS_ID_26 = "26";//文化艺术（id=26）
 	public final static String NEWS_ID_27 = "27";//科技创新（id=27）
 	

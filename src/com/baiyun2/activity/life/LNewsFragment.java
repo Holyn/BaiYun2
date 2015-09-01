@@ -100,7 +100,7 @@ public class LNewsFragment extends BaseFragment{
 		// TODO Auto-generated method stub
 		super.onResume();
 		if (newsId.equalsIgnoreCase(LNewsActivity.NEWS_ID_24)) {
-			((LNewsActivity)getActivity()).setTopBarTitle("党建合作");
+			((LNewsActivity)getActivity()).setTopBarTitle("党团活动");
 		}else if (newsId.equalsIgnoreCase(LNewsActivity.NEWS_ID_26)) {
 			((LNewsActivity)getActivity()).setTopBarTitle("文化艺术");
 		}else if (newsId.equalsIgnoreCase(LNewsActivity.NEWS_ID_27)) {
