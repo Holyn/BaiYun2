@@ -145,16 +145,18 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="42dp"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:padding="10dp" >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_classname_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
             android:text="班级"
+            android:layout_alignParentLeft="true"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_16" />
 
@@ -162,8 +164,9 @@
             android:id="@+id/tv_className"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_marginLeft="80dp"
             android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
             android:text="计算机1班"
             android:textColor="@color/gray"
             android:textSize="@dimen/text_size_14" />
