@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public abstract class BaseFragment extends Fragment{
 	public View rootView;
@@ -69,6 +70,12 @@ public abstract class BaseFragment extends Fragment{
 				loadingDialog.cancel();
 				loadingDialog = null;
 			}
+		}
+	}
+	
+	protected void toastMsg(String msg) {
+		if (getActivity() != null) {
+			Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
 		}
 	}
 	

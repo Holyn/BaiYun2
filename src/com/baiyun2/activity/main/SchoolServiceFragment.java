@@ -23,6 +23,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baiyun2.activity.MyApplication;
 import com.baiyun2.activity.R;
 import com.baiyun2.activity.schoolservice.SLostFoundActivity;
 import com.baiyun2.activity.schoolservice.SPhoneActivity;
@@ -123,10 +124,16 @@ public class SchoolServiceFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), WebViewActiviry2.class);
-				intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_CLASS_INQUIRY+userInfoSP.getUserName());
-				intent.putExtra(WebViewActiviry2.KEY_TITLE, "课表查询");
-				startActivity(intent);
+				if (((MyApplication)getActivity().getApplication()).isLogin()) {
+					Intent intent = new Intent(getActivity(), WebViewActiviry2.class);
+					intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_CLASS_INQUIRY+userInfoSP.getUserName());
+					intent.putExtra(WebViewActiviry2.KEY_TITLE, "课表查询");
+					startActivity(intent);
+				}else {
+					toastMsg("请先登录！");
+					((MainActivity)getActivity()).setTopBarTitle("用户登录");
+					((MainActivity)getActivity()).switchFragment(2);
+				}
 			}
 		});
 		// 2.成绩查询
