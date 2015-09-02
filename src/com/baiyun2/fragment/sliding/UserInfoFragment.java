@@ -56,22 +56,24 @@ public class UserInfoFragment extends BaseFragment{
 		
 		//头像
 		ivHeader = ((ImageView)rootView.findViewById(R.id.iv_header));
-		String headerPathLast = userInfoPar.getImg();
-		if (!TextUtils.isEmpty(headerPathLast)) {
-			String picUrl = HttpURL.HOST+headerPathLast.substring(1);
-//			System.out.println("====> picUrl = "+picUrl);
-			ImageLoader.getInstance().displayImage(picUrl, ivHeader);
+		String header = userInfoPar.getImg();
+		if (!TextUtils.isEmpty(header)) {
+//			String picUrl = HttpURL.HOST+headerPathLast.substring(1);
+//			ImageLoader.getInstance().displayImage(picUrl, ivHeader);
+
+			ivHeader.setImageBitmap(Base64Util.getBitmapFromImage64(header));
 		}
 		
-		((TextView)rootView.findViewById(R.id.tv_realName)).setText(userInfoPar.getRealName());
-		if (userInfoPar.getGender().equals("1")) {
-			((TextView)rootView.findViewById(R.id.tv_gender)).setText("男");
-		}else if (userInfoPar.getGender().equals("0")) {
-			((TextView)rootView.findViewById(R.id.tv_gender)).setText("女");
-		}
-		((TextView)rootView.findViewById(R.id.tv_mobile)).setText(userInfoPar.getMobile());
-		((TextView)rootView.findViewById(R.id.tv_className)).setText(userInfoPar.getClassName());
-		((TextView)rootView.findViewById(R.id.tv_account)).setText(userInfoPar.getAccount());
+		((TextView)rootView.findViewById(R.id.tv_realName)).setText(userInfoPar.getName());
+//		if (userInfoPar.getGender().equals("1")) {
+//			((TextView)rootView.findViewById(R.id.tv_gender)).setText("男");
+//		}else if (userInfoPar.getGender().equals("0")) {
+//			((TextView)rootView.findViewById(R.id.tv_gender)).setText("女");
+//		}
+		((TextView)rootView.findViewById(R.id.tv_gender)).setText(userInfoPar.getGender());
+		((TextView)rootView.findViewById(R.id.tv_mobile)).setText(userInfoPar.getMobilephone());
+		((TextView)rootView.findViewById(R.id.tv_className)).setText(userInfoPar.getClassname());
+		((TextView)rootView.findViewById(R.id.tv_account)).setText(userInfoPar.getXh());
 		
 		((RelativeLayout)rootView.findViewById(R.id.rl_header)).setOnClickListener(new View.OnClickListener() {
 			
@@ -102,36 +104,39 @@ public class UserInfoFragment extends BaseFragment{
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		getActivity();
-		if (resultCode == Activity.RESULT_OK) {
-			if (requestCode == REQUEST_CODE_SELECT_PIC) {
-				ArrayList<LocalImageVo> list = data.getParcelableArrayListExtra(SelectLocalPicActivity.EXTRA_SELECT_IMAGEVOS);
-				if (list.size() != 0) {
-					showLoadingDialog();
-					LocalImageVo localImageVo = list.get(0);
-					Bitmap bitmap = PictureCompressUtil.getInstance().compress(localImageVo.getPath(), 400, 400, 40);
-					String pic64 = Base64Util.getImage64FromBitmap(bitmap);
-					new SlideMenuHttpUtils(getActivity()).uploadUserImg(userInfoPar.getId(), pic64, new SlideMenuHttpUtils.OnUploadUserImgListener() {
-						
-						@Override
-						public void onUploadUserImg(String imgUrl) {
-							// TODO Auto-generated method stub
-							closeLoadingDialog();
-							if (imgUrl == null) {
-								Toast.makeText(getActivity(), "图片上传失败", Toast.LENGTH_SHORT).show();
-							}else {
-								if (!TextUtils.isEmpty(imgUrl)) {
-									String picUrl = HttpURL.HOST+imgUrl.substring(1);
-									ImageLoader.getInstance().displayImage(picUrl, ivHeader);
-								}
-							}
-						}
-					});
-				}else {
-					Toast.makeText(getActivity(), "请选择图片", Toast.LENGTH_SHORT).show();
-				}
-			}
-		}
+		
+		Toast.makeText(getActivity(), "图片上传暂时不做！", Toast.LENGTH_SHORT).show();
+		
+//		if (resultCode == Activity.RESULT_OK) {
+//			if (requestCode == REQUEST_CODE_SELECT_PIC) {
+//				ArrayList<LocalImageVo> list = data.getParcelableArrayListExtra(SelectLocalPicActivity.EXTRA_SELECT_IMAGEVOS);
+//				if (list.size() != 0) {
+//					showLoadingDialog();
+//					LocalImageVo localImageVo = list.get(0);
+//					Bitmap bitmap = PictureCompressUtil.getInstance().compress(localImageVo.getPath(), 400, 400, 40);
+//					String pic64 = Base64Util.getImage64FromBitmap(bitmap);
+//					new SlideMenuHttpUtils(getActivity()).uploadUserImg(userInfoPar.getId(), pic64, new SlideMenuHttpUtils.OnUploadUserImgListener() {
+//						
+//						@Override
+//						public void onUploadUserImg(String imgUrl) {
+//							// TODO Auto-generated method stub
+//							closeLoadingDialog();
+//							if (imgUrl == null) {
+//								Toast.makeText(getActivity(), "图片上传失败", Toast.LENGTH_SHORT).show();
+//							}else {
+//								if (!TextUtils.isEmpty(imgUrl)) {
+//									String picUrl = HttpURL.HOST+imgUrl.substring(1);
+//									ImageLoader.getInstance().displayImage(picUrl, ivHeader);
+//								}
+//							}
+//						}
+//					});
+//				}else {
+//					Toast.makeText(getActivity(), "请选择图片", Toast.LENGTH_SHORT).show();
+//				}
+//			}
+//		}
+		
 	}
 
 }

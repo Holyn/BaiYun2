@@ -4,13 +4,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class UserInfoPar implements Parcelable {
-	private String id;
-	private String account;
-	private String realName;
+	private String mobilephone;//手机号码 
+	private String xh;//用户名 
+	private String emailaddress;//邮件地址
+	private String name;//姓名 
+	private String classname;//班别 
+	private String img; //头像(返回base64编码字符串) 
 	private String gender;
-	private String mobile;
-	private String className;
-	private String img;
 
 	@Override
 	public int describeContents() {
@@ -20,26 +20,26 @@ public class UserInfoPar implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(id);
-		dest.writeString(account);
-		dest.writeString(realName);
-		dest.writeString(gender);
-		dest.writeString(mobile);
-		dest.writeString(className);
+		dest.writeString(mobilephone);
+		dest.writeString(xh);
+		dest.writeString(emailaddress);
+		dest.writeString(name);
+		dest.writeString(classname);
 		dest.writeString(img);
+		dest.writeString(gender);
 
 	}
 
 	public static final Parcelable.Creator<UserInfoPar> CREATOR = new Parcelable.Creator<UserInfoPar>() {
 		public UserInfoPar createFromParcel(Parcel in) {
 			UserInfoPar par = new UserInfoPar();
-			par.id = in.readString();
-			par.account = in.readString();
-			par.realName = in.readString();
-			par.gender = in.readString();
-			par.mobile = in.readString();
-			par.className = in.readString();
+			par.mobilephone = in.readString();
+			par.xh = in.readString();
+			par.emailaddress = in.readString();
+			par.name = in.readString();
+			par.classname = in.readString();
 			par.img = in.readString();
+			par.gender = in.readString();
 			return par;
 		}
 
@@ -48,28 +48,52 @@ public class UserInfoPar implements Parcelable {
 		}
 	};
 
-	public String getId() {
-		return id;
+	public String getMobilephone() {
+		return mobilephone;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setMobilephone(String mobilephone) {
+		this.mobilephone = mobilephone;
 	}
 
-	public String getAccount() {
-		return account;
+	public String getXh() {
+		return xh;
 	}
 
-	public void setAccount(String account) {
-		this.account = account;
+	public void setXh(String xh) {
+		this.xh = xh;
 	}
 
-	public String getRealName() {
-		return realName;
+	public String getEmailaddress() {
+		return emailaddress;
 	}
 
-	public void setRealName(String realName) {
-		this.realName = realName;
+	public void setEmailaddress(String emailaddress) {
+		this.emailaddress = emailaddress;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getClassname() {
+		return classname;
+	}
+
+	public void setClassname(String classname) {
+		this.classname = classname;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 	public String getGender() {
@@ -80,27 +104,4 @@ public class UserInfoPar implements Parcelable {
 		this.gender = gender;
 	}
 
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
-	public String getClassName() {
-		return className;
-	}
-
-	public void setClassName(String className) {
-		this.className = className;
-	}
-
-	public String getImg() {
-		return img;
-	}
-
-	public void setImg(String img) {
-		this.img = img;
-	}
 }

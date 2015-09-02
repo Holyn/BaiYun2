@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Base64;
 
 public class Base64Util {
@@ -81,6 +82,23 @@ public class Base64Util {
 			return true;
 		} catch (Exception e) {
 			return false;
+		}
+	}
+	
+	public static Bitmap getBitmapFromImage64(String imgStr) {
+		try {
+			byte[] bytes = Base64.decode(imgStr, Base64.DEFAULT);
+			for (int i = 0; i < bytes.length; ++i) {
+				if (bytes[i] < 0) {// 调整异常数据
+					bytes[i] += 256;
+				}
+			}
+			BitmapFactory.Options opts = new BitmapFactory.Options();
+			Bitmap bm = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, opts);
+			
+			return bm;
+		} catch (Exception e) {
+			return null;
 		}
 	}
 

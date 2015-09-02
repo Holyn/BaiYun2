@@ -2,11 +2,13 @@ package com.baiyun2.activity.main;
 
 import com.baiyun2.activity.MyApplication;
 import com.baiyun2.activity.R;
+import com.baiyun2.cache.CachePath;
 import com.baiyun2.constants.Constants;
 import com.baiyun2.custom.CircleImageView;
 import com.baiyun2.custom.GBlurPic;
 import com.baiyun2.http.HttpURL;
 import com.baiyun2.sharepreferences.UserInfoSP;
+import com.baiyun2.util.Base64Util;
 import com.baiyun2.util.ScreenUtil;
 import com.baiyun2.vo.parcelable.UserInfoPar;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -76,14 +78,12 @@ public class SlideMenuFragment extends Fragment{
             		cvHeader.setImageResource(R.drawable.iv_header_default);
             		tvName.setText("登录");
 				}else {//登录
-	        		String headerPathLast = userInfoPar.getImg();
-	        		if (!TextUtils.isEmpty(headerPathLast)) {
-	        			String picUrl = HttpURL.HOST+headerPathLast.substring(1);
-	        			System.out.println("====> picUrl = "+picUrl);
-	        			ImageLoader.getInstance().displayImage(picUrl, cvHeader);
+	        		String header = userInfoPar.getImg();
+	        		if (!TextUtils.isEmpty(header)) {
+	        			cvHeader.setImageBitmap(Base64Util.getBitmapFromImage64(header));
 	        		}
 	        		
-	        		String name = userInfoPar.getRealName();
+	        		String name = userInfoPar.getName();
 	        		if (!TextUtils.isEmpty(name)) {
 	        			tvName.setText(name);
 	        		}
@@ -127,14 +127,12 @@ public class SlideMenuFragment extends Fragment{
 		
 		if (((MyApplication)getActivity().getApplication()).isLogin()) {
 			//头像
-			String headerPathLast = UserInfoSP.getSingleInstance(getActivity()).getImg();
-			if (!TextUtils.isEmpty(headerPathLast)) {
-				String picUrl = HttpURL.HOST+headerPathLast.substring(1);
-//				System.out.println("====> picUrl = "+picUrl);
-				ImageLoader.getInstance().displayImage(picUrl, cvHeader);
+			String header = UserInfoSP.getSingleInstance(getActivity()).getImg();
+			if (!TextUtils.isEmpty(header)) {
+				cvHeader.setImageBitmap(Base64Util.getBitmapFromImage64(header));
 			}
 			//名字
-			String name = UserInfoSP.getSingleInstance(getActivity()).getRealName();
+			String name = UserInfoSP.getSingleInstance(getActivity()).getName();
 			if (!TextUtils.isEmpty(name)) {
 				tvName.setText(name);
 			}

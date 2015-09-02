@@ -80,6 +80,10 @@ public class LoginFragment extends BaseFragment {
 
 			}
 		});
+		String name = UserInfoSP.getSingleInstance(getActivity()).getXh();//账号
+		if (!TextUtils.isEmpty(name)) {
+			etName.setText(name);
+		}
 
 		etPassword = (EditText) rootView.findViewById(R.id.et_password);
 		ivPassword = (ImageView) rootView.findViewById(R.id.iv_password);
@@ -211,7 +215,6 @@ public class LoginFragment extends BaseFragment {
 						closeLoadingDialog();
 						// TODO Auto-generated method stub
 						if (userInfoPar != null) {
-							etName.setText("");
 							etPassword.setText("");
 							etVeriCode.setText("");
 							

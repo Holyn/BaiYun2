@@ -38,24 +38,26 @@ public class UserInfoSP {
 	
 	public void setUserInfoPar(UserInfoPar userInfoPar) {
 		// TODO Auto-generated method stub
-		setId(userInfoPar.getId());
-		setAccount(userInfoPar.getAccount());
-		setRealName(userInfoPar.getRealName());
-		setGender(userInfoPar.getGender());
-		setMobile(userInfoPar.getMobile());
-		setClassName(userInfoPar.getClassName());
+//		setId(userInfoPar.getId());
+		setMobilephone(userInfoPar.getMobilephone());
+		setXh(userInfoPar.getXh());
+		setEmailaddress(userInfoPar.getEmailaddress());
+		setName(userInfoPar.getName());
+		setClassname(userInfoPar.getClassname());
 		setImg(userInfoPar.getImg());
+		setGender(userInfoPar.getGender());
 	}
 	
 	public UserInfoPar getUserInfoPar() {
 		UserInfoPar userInfoPar = new UserInfoPar();
-		userInfoPar.setId(getId());
-		userInfoPar.setAccount(getAccount());
-		userInfoPar.setRealName(getRealName());
-		userInfoPar.setGender(getGender());
-		userInfoPar.setMobile(getMobile());
-		userInfoPar.setClassName(getClassName());
+//		userInfoPar.setId(getId());
+		userInfoPar.setMobilephone(getMobilephone());
+		userInfoPar.setXh(getXh());
+		userInfoPar.setEmailaddress(getEmailaddress());
+		userInfoPar.setName(getName());
+		userInfoPar.setClassname(getClassname());
 		userInfoPar.setImg(getImg());
+		userInfoPar.setGender(getGender());
 		return userInfoPar;
 	}
 
@@ -69,57 +71,57 @@ public class UserInfoSP {
 		return sp.getString("id", "");
 	}
 
-	//account
-	public void setAccount(String account) {
-		editor.putString("account", account);
+	//mobilephone 手机号码 
+	public void setMobilephone(String mobilephone) {
+		editor.putString("mobilephone", mobilephone);
 		editor.commit();
 	}
 
-	public String getAccount() {
-		return sp.getString("account", "");
+	public String getMobilephone() {
+		return sp.getString("mobilephone", "");
 	}
 	
-	//realName
-	public void setRealName(String realName) {
-		editor.putString("realName", realName);
+	//xh 用户名 
+	public void setXh(String xh) {
+		editor.putString("xh", xh);
 		editor.commit();
 	}
 
-	public String getRealName() {
-		return sp.getString("realName", "");
+	public String getXh() {
+		return sp.getString("xh", "");
 	}
 	
-	//gender
-	public void setGender(String gender) {
-		editor.putString("gender", gender);
+	//emailaddress 邮件地址 
+	public void setEmailaddress(String emailaddress) {
+		editor.putString("emailaddress", emailaddress);
 		editor.commit();
 	}
 
-	public String getGender() {
-		return sp.getString("gender", "");
+	public String getEmailaddress() {
+		return sp.getString("emailaddress", "");
 	}
 	
-	//mobile
-	public void setMobile(String mobile) {
-		editor.putString("mobile", mobile);
+	//name 姓名 
+	public void setName(String name) {
+		editor.putString("name", name);
 		editor.commit();
 	}
 
-	public String getMobile() {
-		return sp.getString("mobile", "");
+	public String getName() {
+		return sp.getString("name", "");
 	}
 	
-	//className
-	public void setClassName(String className) {
-		editor.putString("className", className);
+	//classname 班别 
+	public void setClassname(String className) {
+		editor.putString("classname", className);
 		editor.commit();
 	}
 
-	public String getClassName() {
-		return sp.getString("className", "");
+	public String getClassname() {
+		return sp.getString("classname", "");
 	}
 	
-	//img
+	//img 头像(返回base64编码字符串)
 	public void setImg(String img) {
 		editor.putString("img", img);
 		editor.commit();
@@ -127,6 +129,16 @@ public class UserInfoSP {
 
 	public String getImg() {
 		return sp.getString("img", "");
+	}
+	
+	//gender 性别 
+	public void setGender(String gender) {
+		editor.putString("gender", gender);
+		editor.commit();
+	}
+
+	public String getGender() {
+		return sp.getString("gender", "");
 	}
 	
 	//userName
