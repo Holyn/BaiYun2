@@ -131,8 +131,7 @@ public class SchoolServiceFragment extends BaseFragment {
 					startActivity(intent);
 				}else {
 					toastMsg("请先登录！");
-					((MainActivity)getActivity()).setTopBarTitle("用户登录");
-					((MainActivity)getActivity()).switchFragment(2);
+					((MainActivity)getActivity()).showLoginFragment();
 				}
 			}
 		});
@@ -142,10 +141,15 @@ public class SchoolServiceFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), WebViewActiviry2.class);
-				intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_SCORE_INQUIRY);
-				intent.putExtra(WebViewActiviry2.KEY_TITLE, "成绩查询");
-				startActivity(intent);
+				if (((MyApplication)getActivity().getApplication()).isLogin()) {
+					Intent intent = new Intent(getActivity(), WebViewActiviry2.class);
+					intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_SCORE_INQUIRY);
+					intent.putExtra(WebViewActiviry2.KEY_TITLE, "成绩查询");
+					startActivity(intent);
+				}else {
+					toastMsg("请先登录！");
+					((MainActivity)getActivity()).showLoginFragment();
+				}
 			}
 		});
 
@@ -155,8 +159,13 @@ public class SchoolServiceFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), SLostFoundActivity.class);
-				getActivity().startActivity(intent);
+				if (((MyApplication)getActivity().getApplication()).isLogin()) {
+					Intent intent = new Intent(getActivity(), SLostFoundActivity.class);
+					getActivity().startActivity(intent);
+				}else {
+					toastMsg("请先登录！");
+					((MainActivity)getActivity()).showLoginFragment();
+				}
 			}
 		});
 
@@ -166,10 +175,15 @@ public class SchoolServiceFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), WebViewActiviry2.class);
-				intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_TEACH_TASK+userInfoSP.getUserName());
-				intent.putExtra(WebViewActiviry2.KEY_TITLE, "教学任务");
-				startActivity(intent);
+				if (((MyApplication)getActivity().getApplication()).isLogin()) {
+					Intent intent = new Intent(getActivity(), WebViewActiviry2.class);
+					intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_TEACH_TASK+userInfoSP.getUserName());
+					intent.putExtra(WebViewActiviry2.KEY_TITLE, "教学任务");
+					startActivity(intent);
+				}else {
+					toastMsg("请先登录！");
+					((MainActivity)getActivity()).showLoginFragment();
+				}
 			}
 		});
 
@@ -179,10 +193,15 @@ public class SchoolServiceFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), WebViewActiviry2.class);
-				intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_EXAM+userInfoSP.getUserName());
-				intent.putExtra(WebViewActiviry2.KEY_TITLE, "考试安排");
-				startActivity(intent);
+				if (((MyApplication)getActivity().getApplication()).isLogin()) {
+					Intent intent = new Intent(getActivity(), WebViewActiviry2.class);
+					intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_EXAM+userInfoSP.getUserName());
+					intent.putExtra(WebViewActiviry2.KEY_TITLE, "考试安排");
+					startActivity(intent);
+				}else {
+					toastMsg("请先登录！");
+					((MainActivity)getActivity()).showLoginFragment();
+				}
 			}
 		});
 
@@ -192,10 +211,15 @@ public class SchoolServiceFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), WebViewActiviry2.class);
-				intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_HYDROP_POWER+userInfoSP.getUserName());
-				intent.putExtra(WebViewActiviry2.KEY_TITLE, "水电查询");
-				startActivity(intent);
+				if (((MyApplication)getActivity().getApplication()).isLogin()) {
+					Intent intent = new Intent(getActivity(), WebViewActiviry2.class);
+					intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_HYDROP_POWER+userInfoSP.getUserName());
+					intent.putExtra(WebViewActiviry2.KEY_TITLE, "水电查询");
+					startActivity(intent);
+				}else {
+					toastMsg("请先登录！");
+					((MainActivity)getActivity()).showLoginFragment();
+				}
 			}
 		});
 
@@ -205,23 +229,28 @@ public class SchoolServiceFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				if (goRepairsUrl != null) {
-					if (!(goRepairsUrl.contains("http://"))) {
-						goRepairsUrl = "http://" + goRepairsUrl;
-					}
-					new AlertDialog.Builder(getActivity()).setTitle("温馨提示").setMessage("跳转到：" + goRepairsUrl)
-							.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									if (URLUtil.isNetworkUrl(goRepairsUrl)) {
-										Uri uri = Uri.parse(goRepairsUrl);
-										Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-										getActivity().startActivity(intent);
-									} else {
-										Toast.makeText(getActivity(), "网站链接不正确\n" + goRepairsUrl, Toast.LENGTH_SHORT).show();
+				if (((MyApplication)getActivity().getApplication()).isLogin()) {
+					if (goRepairsUrl != null) {
+						if (!(goRepairsUrl.contains("http://"))) {
+							goRepairsUrl = "http://" + goRepairsUrl;
+						}
+						new AlertDialog.Builder(getActivity()).setTitle("温馨提示").setMessage("跳转到：" + goRepairsUrl)
+								.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										if (URLUtil.isNetworkUrl(goRepairsUrl)) {
+											Uri uri = Uri.parse(goRepairsUrl);
+											Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+											getActivity().startActivity(intent);
+										} else {
+											Toast.makeText(getActivity(), "网站链接不正确\n" + goRepairsUrl, Toast.LENGTH_SHORT).show();
+										}
 									}
-								}
-							}).setNegativeButton("取消", null).create().show();
+								}).setNegativeButton("取消", null).create().show();
+					}
+				}else {
+					toastMsg("请先登录！");
+					((MainActivity)getActivity()).showLoginFragment();
 				}
 			}
 		});
@@ -232,8 +261,13 @@ public class SchoolServiceFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), SPhoneActivity.class);
-				getActivity().startActivity(intent);
+				if (((MyApplication)getActivity().getApplication()).isLogin()) {
+					Intent intent = new Intent(getActivity(), SPhoneActivity.class);
+					getActivity().startActivity(intent);
+				}else {
+					toastMsg("请先登录！");
+					((MainActivity)getActivity()).showLoginFragment();
+				}
 			}
 		});
 
@@ -243,10 +277,15 @@ public class SchoolServiceFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), WebViewActiviry2.class);
-				intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_LIBRARY+userInfoSP.getUserName());
-				intent.putExtra(WebViewActiviry2.KEY_TITLE, "图书馆");
-				startActivity(intent);
+				if (((MyApplication)getActivity().getApplication()).isLogin()) {
+					Intent intent = new Intent(getActivity(), WebViewActiviry2.class);
+					intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_LIBRARY+userInfoSP.getUserName());
+					intent.putExtra(WebViewActiviry2.KEY_TITLE, "图书馆");
+					startActivity(intent);
+				}else {
+					toastMsg("请先登录！");
+					((MainActivity)getActivity()).showLoginFragment();
+				}
 			}
 		});
 	}

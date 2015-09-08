@@ -244,6 +244,27 @@ public class MainActivity extends BaseSlidingFragmentActivity {
 		}
 		return super.onKeyDown(keyCode, event);
 	}
+	
+	public void showLoginFragment() {
+		setBackPressEnabled(true);
+		setDrawerBtnEnable(false);
+		
+		//控制标题的拼音字母的隐与显
+		if (isTopBarTitlePinyinEnable()) {
+			setTopBarTitlePinyinEnable(false);
+			isSetTopBarTitlePinyinFalse = true;
+		}
+		
+		//控制右上角的查询按钮的隐与显
+		if (isLLConsultEnable()) {
+			setLLConsultEnable(false);
+			isSetLLConsultEnableFalse = true;
+		}
+		
+		setTopBarTitle("用户登录");
+		switchFragment(2);
+		
+	}
 
 	private void appExit(){//退出app
     	MainActivity.this.finish();
