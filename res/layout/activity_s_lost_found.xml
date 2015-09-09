@@ -23,15 +23,6 @@
             android:scaleType="centerInside"
             android:src="@drawable/ic_actionbar_back" />
 
-        <ImageView
-            android:id="@+id/iv_actionbar_line_left"
-            android:layout_width="wrap_content"
-            android:layout_height="22dp"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/ib_actionbar_back"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_actionbar_separate_line" />
-
         <TextView
             android:id="@+id/tv_actionbar_title"
             android:layout_width="wrap_content"
@@ -40,15 +31,6 @@
             android:text="失物招领"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_18" />
-
-        <ImageView
-            android:id="@+id/iv_actionbar_line_right"
-            android:layout_width="wrap_content"
-            android:layout_height="22dp"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/btn_publish"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_actionbar_separate_line" />
 
         <Button
             android:id="@+id/btn_publish"
