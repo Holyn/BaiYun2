@@ -122,6 +122,10 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.baiyun2.activity.schoolservice.SLostPublishActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.baiyun2.activity.schoolservice.SPhoneActivity"
             android:screenOrientation="portrait" >
         </activity>

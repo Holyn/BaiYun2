@@ -319,6 +319,18 @@ public class HttpURL {
 	public final static String S_LOST_FOUND = URL_PRE + "/getLostAndFound";
 	
 	/**
+	 * 校内服务--发布寻物启事内容
+	 * http://app.baiyunu.edu.cn:8081/app/setLostAndFound?brief=寻物启事内容&userName=用户名
+	 */
+	public final static String S_LOST_PUBLISH_CONTENT = URL_PRE + "setLostAndFound";
+	
+	/**
+	 * 校内服务--发布寻物启事照片（与内容id关联）
+	 * http://app.baiyunu.edu.cn:8081/app/uploadLostAndFoundPicture?id=(返回的内容id)&img=（通过base64编码后的图片编码）
+	 */
+	public final static String S_LOST_PUBLISH_PIC = URL_PRE + "uploadLostAndFoundPicture";
+	
+	/**
 	 * 校内服务--办公电话
 	 * http://app.baiyunu.edu.cn:8081/app/serviceType?type=38
 	 */
