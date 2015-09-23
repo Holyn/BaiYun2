@@ -343,6 +343,12 @@ public class HttpURL {
 	public final static String S_REPAIRS = URL_PRE + "serviceType?type=42";
 	
 	/**
+	 * 校内服务--故障报修（新）
+	 * http://app.baiyunu.edu.cn:8081/app/troubleShooting.html?username=
+	 */
+	public final static String S_TROUBLE_SHOOTING = HOST + "/troubleShooting.html?username=";
+	
+	/**
 	 * 右侧菜单--获取验证码
 	 * http://app.baiyunu.edu.cn:8081/app/getRandomStringImage
 	 */
