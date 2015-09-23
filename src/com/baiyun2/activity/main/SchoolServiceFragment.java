@@ -111,7 +111,7 @@ public class SchoolServiceFragment extends BaseFragment {
 	@Override
 	public void createMyView(View rootView) {
 		initView(rootView);
-		getNetData();
+//		getNetData();
 		
 		initADs(rootView);
 		getAd();
@@ -230,24 +230,30 @@ public class SchoolServiceFragment extends BaseFragment {
 			@Override
 			public void onClick(View v) {
 				if (((MyApplication)getActivity().getApplication()).isLogin()) {
-					if (goRepairsUrl != null) {
-						if (!(goRepairsUrl.contains("http://"))) {
-							goRepairsUrl = "http://" + goRepairsUrl;
-						}
-						new AlertDialog.Builder(getActivity()).setTitle("温馨提示").setMessage("跳转到：" + goRepairsUrl)
-								.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										if (URLUtil.isNetworkUrl(goRepairsUrl)) {
-											Uri uri = Uri.parse(goRepairsUrl);
-											Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-											getActivity().startActivity(intent);
-										} else {
-											Toast.makeText(getActivity(), "网站链接不正确\n" + goRepairsUrl, Toast.LENGTH_SHORT).show();
-										}
-									}
-								}).setNegativeButton("取消", null).create().show();
-					}
+//					if (goRepairsUrl != null) {
+//						if (!(goRepairsUrl.contains("http://"))) {
+//							goRepairsUrl = "http://" + goRepairsUrl;
+//						}
+//						new AlertDialog.Builder(getActivity()).setTitle("温馨提示").setMessage("跳转到：" + goRepairsUrl)
+//								.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//									@Override
+//									public void onClick(DialogInterface dialog, int which) {
+//										if (URLUtil.isNetworkUrl(goRepairsUrl)) {
+//											Uri uri = Uri.parse(goRepairsUrl);
+//											Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//											getActivity().startActivity(intent);
+//										} else {
+//											Toast.makeText(getActivity(), "网站链接不正确\n" + goRepairsUrl, Toast.LENGTH_SHORT).show();
+//										}
+//									}
+//								}).setNegativeButton("取消", null).create().show();
+//					}
+					
+					Intent intent = new Intent(getActivity(), WebViewActiviry2.class);
+					intent.putExtra(WebViewActiviry2.KEY_URL_FULL, HttpURL.S_TROUBLE_SHOOTING+userInfoSP.getUserName());
+					intent.putExtra(WebViewActiviry2.KEY_TITLE, "故障报修");
+					startActivity(intent);
+					
 				}else {
 					toastMsg("请先登录！");
 					((MainActivity)getActivity()).showLoginFragment();
